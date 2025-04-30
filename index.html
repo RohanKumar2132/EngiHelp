@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EngiHelp - Engineering Student Helpdesk</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/kTcUgA5b8gS+enW7YxX6iZg4H0dR/e9uHRVwHRvzIr1oF6uIQ7Jx3bAIgJ8eVz0hqVwgD/BgKq6ug=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- AOS Animation Library -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- jsPDF Library for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="#home" class="logo-text">EH</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#resources"><i class="fas fa-book-open"></i> Resources</a></li>
+          <li><a href="#cgpa-calculator"><i class="fas fa-calculator"></i> CGPA Calculator</a></li>
+          <li><a href="#roadmaps"><i class="fas fa-road"></i> Roadmaps</a></li>
+          <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <h1>Your Engineering Journey Made Easier</h1>
+        <p>Explore resources, tools, and guidance tailored for engineering students.</p>
+        <div class="carousel" id="carousel">
+          <img src="engineering1.jpg" alt="Engineering Animation 1" />
+          <img src="engineering2.jpg" alt="Engineering Animation 2" />
+          <img src="engineering3.jpg" alt="Engineering Animation 3" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2>Resources</h2>
+        <p>Access curated resources for academic success, programming, and competitive exams like GATE.</p>
+        <div class="resources-grid">
+          <!-- Card for Apna College -->
+          <div class="resource-card">
+            <a href="https://www.youtube.com/c/ApnaCollegeOfficial" target="_blank">
+              <img src="apna_college.jpg" alt="Apna College" />
+              <h3>Apna College</h3>
+            </a>
+          </div>
+
+          <!-- Card for College Wallah -->
+          <div class="resource-card">
+            <a href="https://www.youtube.com/c/CollegeWallah" target="_blank">
+              <img src="college_wallah.jpg" alt="College Wallah" />
+              <h3>College Wallah</h3>
+            </a>
+          </div>
+
+          <!-- Card for Code With Harry -->
+          <div class="resource-card">
+            <a href="https://www.youtube.com/c/CodeWithHarry" target="_blank">
+              <img src="code_with_harry.jpg" alt="Code With Harry" />
+              <h3>Code With Harry</h3>
+            </a>
+          </div>
+
+          <!-- Card for Made Easy GATE -->
+          <div class="resource-card">
+            <a href="https://www.youtube.com/c/MadeEasyGate" target="_blank">
+              <img src="made_easy.jpg" alt="Made Easy GATE" />
+              <h3>Made Easy GATE</h3>
+            </a>
+          </div>
+
+          <!-- Card for Unacademy GATE -->
+          <div class="resource-card">
+            <a href="https://www.youtube.com/c/UnacademyGate" target="_blank">
+              <img src="unacademy_gate.jpg" alt="Unacademy GATE" />
+              <h3>Unacademy GATE</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CGPA Calculator Section -->
+    <section id="cgpa-calculator" class="section" data-aos="zoom-in">
+      <div class="container">
+        <h2>CGPA Calculator</h2>
+        <form id="initial-form">
+          <div class="form-group">
+            <label for="theory-count">Number of Theory Subjects:</label>
+            <input
+              type="number"
+              id="theory-count"
+              placeholder="e.g., 5"
+              min="1"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="practical-count">Number of Practical Subjects:</label>
+            <input
+              type="number"
+              id="practical-count"
+              placeholder="e.g., 3"
+              min="1"
+              required
+            />
+          </div>
+          <button type="button" class="btn" onclick="createSubjectInputs()">
+            Next
+          </button>
+        </form>
+        <form id="subject-form" style="display: none">
+          <div id="subjects-container"></div>
+          <button type="button" class="btn" onclick="calculateCGPA()">
+            Calculate CGPA
+          </button>
+        </form>
+        <p id="result" class="result"></p>
+      </div>
+    </section>
+    <!-- RGPV Result Checker Section -->
+<section id="rgpv-result-checker" class="section" data-aos="fade-up">
+  <div class="container">
+    <h2>RGPV Result Checker</h2>
+    <p>Enter your details below to check your RGPV result.</p>
+    <form id="result-form">
+      <div class="form-group">
+        <label for="enrollment-number">Enrollment Number:</label>
+        <input type="text" id="enrollment-number" placeholder="Enter Enrollment Number" required />
+      </div>
+      <div class="form-group">
+        <label for="semester">Semester:</label>
+        <input type="number" id="semester" placeholder="Enter Semester Number" required />
+      </div>
+      <div class="form-group">
+        <label for="captcha">CAPTCHA:</label>
+        <input type="text" id="captcha" placeholder="Enter CAPTCHA" required />
+        <img src="captcha_image.jpg" alt="CAPTCHA Image" id="captcha-img" />
+        <button type="button" onclick="refreshCaptcha()">Refresh CAPTCHA</button>
+      </div>
+      <button type="button" class="btn" onclick="fetchRgpvResult()">Check Result</button>
+    </form>
+    
+    <!-- Result Display -->
+    <div id="result-display" style="display: none;">
+      <h3>Result:</h3>
+      <div id="result-details">
+        <!-- Display result here -->
+      </div>
+      <button class="btn" onclick="downloadResult()">Download Result (PDF)</button>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Roadmaps Section -->
+    <section id="roadmaps" class="section" data-aos="fade-right">
+      <div class="container">
+        <h2>Engineering Career Roadmaps</h2>
+        <p>Explore various career paths and plan your journey in the engineering field.</p>
+        <div class="roadmaps-grid">
+          <!-- Roadmap Cards -->
+          <div class="roadmap-card">
+            <i class="fas fa-cogs"></i>
+            <h3>Mechanical Engineering</h3>
+            <p>Pathways in design, manufacturing, and automotive industries.</p>
+          </div>
+          <div class="roadmap-card">
+            <i class="fas fa-microchip"></i>
+            <h3>Electrical Engineering</h3>
+            <p>Careers in power systems, electronics, and telecommunications.</p>
+          </div>
+          <div class="roadmap-card">
+            <i class="fas fa-code"></i>
+            <h3>Computer Engineering</h3>
+            <p>Opportunities in software development, AI, and cybersecurity.</p>
+          </div>
+          <div class="roadmap-card">
+            <i class="fas fa-rocket"></i>
+            <h3>Aerospace Engineering</h3>
+            <p>Roles in aerospace design, space exploration, and defense.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section id="faq" class="section" data-aos="fade-up">
+      <div class="container">
+        <h2>FAQs</h2>
+        <div class="faq-item">
+          <h3>How can I calculate my CGPA?</h3>
+          <p>Use the CGPA calculator above by entering the number of your theory and practical subjects, followed by their respective grades and credits.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Where can I find study resources?</h3>
+          <p>Visit the Resources section where we've compiled links to essential guides, textbooks, and tutorials.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I plan my engineering career?</h3>
+          <p>Check out the Roadmaps section to explore various career paths and plan your professional journey accordingly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="section" data-aos="zoom-in">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <form>
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-links">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Roadmaps</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <p>© 2024 EngiHelp. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
