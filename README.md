@@ -4,10 +4,15 @@ EngiHelp is an educational platform designed to provide resources, roadmaps, and
 Table of Contents
 
 Project Overview
+
 Features
+
 Technoogies Used
+
 Installation
+
 Usage
+
 Contributing
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Project Overview
